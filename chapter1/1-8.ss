@@ -1,0 +1,22 @@
+#lang sicp
+
+(define (cube-root x)
+  (define (cube-root-iter guess)
+    (define (good-enough? new-guess old-guess)
+      (< (/ (abs (- new-guess old-guess))
+            old-guess)
+         0.01))
+    (define (improve guess)
+      (/ (+ (/ x (* guess guess))
+            (* 2 guess))
+         3))
+    (if (good-enough? (improve guess) guess)
+        (improve guess)
+        (cube-root-iter (improve guess))))
+  (cube-root-iter 1.0))
+
+(cube-root 8)
+(cube-root 27)
+(cube-root 100)
+(cube-root 999999999999999999999999)
+(cube-root 0.00001)
