@@ -5,7 +5,7 @@
     (if (= count k)
         (/ (n count) (d count))
         (/ (n count) (+ (d count)
-                    (cal n d (+ count 1))))))
+                        (cal n d (+ count 1))))))
   (cal n d 1))
 
 (define (cont-frac-iter n d k)
@@ -15,10 +15,15 @@
         (cal n d (- count 1) (/ (n count) (+ (d count) result)))))
   (cal n d (- k 1) (/ (n k) (d k))))
 
-(cont-frac (lambda (i) 1.0)
-           (lambda (i) 1.0)
-           1000)
+(define (golden-ratio k)
+ (+ 1 (cont-frac (lambda (i) 1.0)
+                 (lambda (i) 1.0)
+                 k)))
 
-(cont-frac-iter (lambda (i) 1.0)
-                (lambda (i) 1.0)
-                1000)
+(define (golden-ratio-iter k)
+  (+ 1 (cont-frac-iter (lambda (i) 1.0)
+                       (lambda (i) 1.0)
+                       k)))
+
+(golden-ratio 1000)
+(golden-ratio-iter 1000)
